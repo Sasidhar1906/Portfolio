@@ -1,756 +1,563 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gedela Sasidhar Chakrapani — Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-    rel="stylesheet">
-  <style>
-    :root {
-      --bg: #F7F8FA;
-      --panel: #FFFFFF;
-      --ink: #12161C;
-      --muted: #5B6472;
-      --line: #E2E5EA;
-      --accent: #2F6FED;
-      --accent-dim: #E8EEFC;
-      --radius: 10px;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--ink);
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    ::selection {
-      background: var(--accent-dim);
-      color: var(--accent);
-    }
-
-    a {
-      color: inherit;
-    }
-
-    .wrap {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 0 28px;
-    }
-
-    /* ---------- signal trace / node motif ---------- */
-    .eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12.5px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 18px;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 3px var(--accent-dim);
-      flex-shrink: 0;
-    }
-
-    .eyebrow::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: var(--line);
-    }
-
-    /* ---------- header / nav ---------- */
-    header {
-      position: sticky;
-      top: 0;
-      background: rgba(247, 248, 250, 0.85);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--line);
-      z-index: 10;
-    }
-
-    .nav-inner {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 18px 28px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .nav-mark {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 15px;
-      letter-spacing: -0.01em;
-    }
-
-    .nav-mark span {
-      color: var(--accent);
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 26px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: var(--muted);
-      transition: color .15s;
-    }
-
-    nav a:hover {
-      color: var(--accent);
-    }
-
-    /* ---------- hero ---------- */
-    .hero {
-      padding: 88px 0 72px;
-      position: relative;
-    }
-
-    .hero-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      color: var(--accent);
-      letter-spacing: 0.06em;
-      margin-bottom: 22px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .hero-tag .dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-      animation: pulse 2.2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-
-      0%,
-      100% {
-        opacity: 1;
-      }
-
-      50% {
-        opacity: .35;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .hero-tag .dot {
-        animation: none;
-      }
-    }
-
-    h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: clamp(34px, 5.4vw, 52px);
-      line-height: 1.08;
-      letter-spacing: -0.02em;
-      max-width: 11ch;
-    }
-
-    .role {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 19px;
-      color: var(--muted);
-      margin-top: 16px;
-      max-width: 38ch;
-    }
-
-    .role strong {
-      color: var(--ink);
-      font-weight: 600;
-    }
-
-    .hero-desc {
-      margin-top: 22px;
-      max-width: 52ch;
-      color: var(--muted);
-      font-size: 15.5px;
-    }
-
-    .hero-actions {
-      margin-top: 34px;
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12.5px;
-      letter-spacing: 0.04em;
-      padding: 12px 20px;
-      border-radius: 6px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: transform .15s ease, box-shadow .15s ease;
-    }
-
-    .btn-primary {
-      background: var(--ink);
-      color: #fff;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(18, 22, 28, 0.18);
-    }
-
-    .btn-ghost {
-      border: 1px solid var(--line);
-      color: var(--ink);
-    }
-
-    .btn-ghost:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    /* ---------- circuit trace divider between sections ---------- */
-    .trace {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 0 28px;
-    }
-
-    .trace svg {
-      display: block;
-      width: 100%;
-      height: 28px;
-    }
-
-    section {
-      padding: 64px 0;
-    }
-
-    section h2 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 26px;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      margin-bottom: 20px;
-    }
-
-    /* ---------- about ---------- */
-    .about-body {
-      color: var(--muted);
-      font-size: 15.5px;
-      max-width: 58ch;
-    }
-
-    .about-body strong {
-      color: var(--ink);
-      font-weight: 600;
-    }
-
-    .facts {
-      margin-top: 28px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: 1fr;
-      gap: 1px;
-      background: var(--line);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
-    }
-
-    .fact {
-      background: var(--panel);
-      padding: 18px 16px;
-    }
-
-    .fact-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    .fact-value {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 15px;
-      font-weight: 600;
-    }
-
-    /* ---------- skills ---------- */
-    .skill-groups {
-      display: grid;
-      gap: 22px;
-    }
-
-    .skill-group-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12.5px;
-      padding: 7px 12px;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      background: var(--panel);
-      transition: border-color .15s, color .15s;
-    }
-
-    .tag:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    /* ---------- projects ---------- */
-    .project {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 24px;
-      background: var(--panel);
-      margin-bottom: 16px;
-      transition: box-shadow .15s ease, transform .15s ease;
-    }
-
-    .project:hover {
-      box-shadow: 0 10px 26px rgba(18, 22, 28, 0.06);
-      transform: translateY(-2px);
-    }
-
-    .project-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 16px;
-      margin-bottom: 8px;
-    }
-
-    .project-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 17px;
-      font-weight: 600;
-    }
-
-    .project-link {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11.5px;
-      color: var(--accent);
-      text-decoration: none;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    .project-desc {
-      color: var(--muted);
-      font-size: 14.5px;
-      margin-bottom: 12px;
-    }
-
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .project-tags span {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px;
-      padding: 4px 9px;
-      background: var(--accent-dim);
-      color: var(--accent);
-      border-radius: 5px;
-    }
-
-    .placeholder-note {
-      margin-top: 18px;
-      font-size: 13px;
-      color: var(--muted);
-      font-style: italic;
-    }
-
-    /* ---------- contact ---------- */
-    .contact-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .contact-card {
-      flex: 1 1 200px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 18px;
-      background: var(--panel);
-      text-decoration: none;
-      transition: border-color .15s;
-    }
-
-    .contact-card:hover {
-      border-color: var(--accent);
-    }
-
-    .contact-card .label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    .contact-card .value {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 14.5px;
-      font-weight: 600;
-      color: var(--ink);
-    }
-
-    footer {
-      border-top: 1px solid var(--line);
-      margin-top: 40px;
-      padding: 28px 0 60px;
-      text-align: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11.5px;
-      color: var(--muted);
-      letter-spacing: 0.04em;
-    }
-
-    @media (max-width:600px) {
-      .facts {
-        grid-template-columns: 1fr;
-      }
-
-      nav ul {
-        gap: 16px;
-      }
-
-      .nav-inner {
-        flex-direction: column;
-        gap: 10px;
-        align-items: flex-start;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>sasidhar.dev — portfolio.tsx</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#181227;
+    --panel:#20182F;
+    --panel-alt:#271E38;
+    --border:#382C4C;
+    --text:#F5F0FA;
+    --muted:#A899C4;
+    --dim:#66577F;
+    --gold:#FFC24B;
+    --teal:#4FE8C4;
+    --violet:#FF6F9C;
+    --rose:#FF6F9C;
+    --mono:'IBM Plex Mono', monospace;
+    --sans:'IBM Plex Sans', sans-serif;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    font-size:15px;
+  }
+  ::selection{background:rgba(255,194,75,0.28); color:var(--text);}
+  a{color:inherit; text-decoration:none;}
+
+  :focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+
+  /* ================= editor window frame ================= */
+  .editor{
+    max-width:900px;
+    margin:32px auto 80px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    overflow:hidden;
+    box-shadow:0 40px 80px -30px rgba(0,0,0,0.6);
+  }
+
+  .titlebar{
+    background:var(--panel-alt);
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:0 18px;
+    height:44px;
+  }
+  .traffic{display:flex; gap:7px;}
+  .traffic span{width:11px; height:11px; border-radius:50%; display:block;}
+  .traffic .r{background:#4A2E42;}
+  .traffic .y{background:#4A3E2A;}
+  .traffic .g{background:#2A4A3E;}
+
+  .tabs{display:flex; height:100%; align-items:stretch; flex:1; overflow-x:auto;}
+  .tab{
+    display:flex; align-items:center; gap:8px;
+    padding:0 16px;
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--muted);
+    border-right:1px solid var(--border);
+    white-space:nowrap;
+  }
+  .tab.active{
+    color:var(--text);
+    background:var(--bg);
+    border-top:2px solid var(--gold);
+    margin-top:-1px;
+  }
+  .tab .dot{width:6px; height:6px; border-radius:50%; background:var(--teal); flex-shrink:0;}
+
+  /* ================= body: gutter + content ================= */
+  .body-row{
+    display:flex;
+    background:var(--bg);
+  }
+  .gutter{
+    width:52px;
+    flex-shrink:0;
+    border-right:1px solid var(--border);
+    padding-top:40px;
+    position:relative;
+  }
+  .line-mark{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--dim);
+    text-align:right;
+    padding-right:14px;
+    position:absolute;
+    right:0;
+    width:100%;
+  }
+
+  .content{
+    flex:1;
+    min-width:0;
+    padding:40px 40px 56px;
+  }
+
+  .cmt{color:var(--muted);}
+  .kw{color:var(--violet);}
+  .str{color:var(--teal);}
+  .num{color:var(--gold);}
+  .punc{color:var(--dim);}
+
+  /* ---------- hero ---------- */
+  .hero{margin-bottom:70px;}
+  .comment-block{
+    font-family:var(--mono);
+    font-size:13.5px;
+    color:var(--muted);
+    line-height:1.9;
+    margin-bottom:26px;
+  }
+
+  h1{
+    font-family:var(--mono);
+    font-weight:700;
+    font-size:clamp(22px,3.4vw,32px);
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color:var(--text);
+    margin-bottom:10px;
+    line-height:1.25;
+  }
+  h1 .cursor{
+    display:inline-block;
+    width:9px; height:1em;
+    background:var(--gold);
+    margin-left:4px;
+    vertical-align:-2px;
+    animation:blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink{50%{opacity:0;}}
+  @media (prefers-reduced-motion: reduce){ h1 .cursor{animation:none;} }
+
+  .role-line{
+    font-family:var(--mono);
+    font-size:14.5px;
+    color:var(--muted);
+    margin-bottom:22px;
+  }
+  .role-line .str{color:var(--teal);}
+
+  .status-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:0.06em;
+    padding:6px 12px;
+    border:1px solid rgba(79,232,196,0.35);
+    background:rgba(79,232,196,0.08);
+    color:var(--teal);
+    border-radius:5px;
+    margin-bottom:28px;
+  }
+  .status-pill .blip{width:6px; height:6px; border-radius:50%; background:var(--teal); box-shadow:0 0 6px var(--teal);}
+
+  .hero-desc{
+    max-width:60ch;
+    color:var(--text);
+    font-size:15px;
+    margin-bottom:30px;
+  }
+
+  .cmd-row{display:flex; gap:12px; flex-wrap:wrap;}
+  .cmd-btn{
+    font-family:var(--mono);
+    font-size:12.5px;
+    padding:11px 18px;
+    border-radius:6px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition:transform .15s ease, border-color .15s ease;
+  }
+  .cmd-btn.primary{background:var(--gold); color:#141822; font-weight:600;}
+  .cmd-btn.primary:hover{transform:translateY(-2px);}
+  .cmd-btn.ghost{border:1px solid var(--border); color:var(--text);}
+  .cmd-btn.ghost:hover{border-color:var(--muted); transform:translateY(-2px);}
+
+  /* ---------- section headers ---------- */
+  section{margin-bottom:70px;}
+  .sec-head{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--dim);
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .sec-head .fn{color:var(--violet);}
+  .sec-head .paren{color:var(--dim);}
+  .sec-head::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--border);
+  }
+
+  /* ---------- about / stats table ---------- */
+  .about-text{
+    color:var(--text);
+    font-size:14.5px;
+    max-width:64ch;
+    margin-bottom:24px;
+  }
+  .stats-table{
+    font-family:var(--mono);
+    font-size:13px;
+    border:1px solid var(--border);
+    border-radius:6px;
+    overflow:hidden;
+  }
+  .stats-row{
+    display:flex;
+    border-bottom:1px solid var(--border);
+  }
+  .stats-row:last-child{border-bottom:none;}
+  .stats-row .k{
+    width:180px;
+    flex-shrink:0;
+    padding:11px 14px;
+    color:var(--muted);
+    background:var(--panel);
+    border-right:1px solid var(--border);
+  }
+  .stats-row .v{
+    padding:11px 14px;
+    color:var(--teal);
+  }
+
+  /* ---------- skills as imports ---------- */
+  .import-block{margin-bottom:18px;}
+  .import-line{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--dim);
+    margin-bottom:9px;
+  }
+  .import-line .kw{color:var(--violet);}
+  .import-line .str{color:var(--teal);}
+  .tag-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    padding-left:2px;
+  }
+  .tag{
+    font-family:var(--mono);
+    font-size:12px;
+    padding:6px 11px;
+    border:1px solid var(--border);
+    border-radius:5px;
+    background:var(--panel);
+    color:var(--text);
+    transition:border-color .15s;
+  }
+  .tag:hover{border-color:var(--gold); color:var(--gold);}
+
+  /* ---------- projects as object literals ---------- */
+  .code-card{
+    font-family:var(--mono);
+    font-size:12.8px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:20px 22px;
+    margin-bottom:16px;
+    line-height:1.85;
+    transition:border-color .15s, transform .15s;
+  }
+  .code-card:hover{border-color:rgba(255,194,75,0.4); transform:translateY(-2px);}
+  .code-card .key{color:var(--violet);}
+  .code-card .colon{color:var(--dim);}
+  .code-card .val{color:var(--teal);}
+  .code-card .brace{color:var(--dim);}
+  .code-card .arr{color:var(--dim);}
+  .code-card .desc-val{color:var(--text); display:block; margin:2px 0 2px 20px;}
+  .code-card .stack-tags{margin-left:20px; display:flex; flex-wrap:wrap; gap:6px; margin-top:2px; margin-bottom:2px;}
+  .code-card .stack-tags span{
+    background:rgba(255,111,156,0.14);
+    color:var(--violet);
+    padding:2px 8px;
+    border-radius:4px;
+    font-size:11.5px;
+  }
+  .code-card a.val{border-bottom:1px dashed rgba(79,232,196,0.4);}
+  .code-card a.val:hover{color:var(--gold); border-color:var(--gold);}
+  .indent{padding-left:20px;}
+
+  /* ---------- achievements as git log ---------- */
+  .git-log{
+    font-family:var(--mono);
+    font-size:12.5px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:22px;
+  }
+  .git-cmd{color:var(--muted); margin-bottom:18px;}
+  .git-cmd .punc{color:var(--dim);}
+  .commit{margin-bottom:20px;}
+  .commit:last-child{margin-bottom:0;}
+  .commit-hash{color:var(--gold);}
+  .commit-hash::before{content:"● "; color:var(--teal);}
+  .commit-msg{
+    color:var(--text);
+    padding-left:20px;
+    margin-top:6px;
+    font-family:var(--sans);
+    font-size:13.5px;
+    line-height:1.6;
+  }
+
+  /* ---------- contact as export object ---------- */
+  .export-block{
+    font-family:var(--mono);
+    font-size:13px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:22px 24px;
+    line-height:2;
+  }
+  .export-block .key{color:var(--violet);}
+  .export-block .colon{color:var(--dim);}
+  .export-block a.val{color:var(--teal); border-bottom:1px dashed rgba(79,232,196,0.35);}
+  .export-block a.val:hover{color:var(--gold); border-color:var(--gold);}
+  .export-block .brace{color:var(--dim);}
+
+  /* ---------- status bar ---------- */
+  .statusbar{
+    background:var(--panel-alt);
+    border-top:1px solid var(--border);
+    padding:8px 18px;
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--dim);
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  .statusbar .ok{color:var(--teal);}
+
+  @media (max-width:640px){
+    .gutter{display:none;}
+    .content{padding:28px 20px 40px;}
+    .stats-row .k{width:130px;}
+    .editor{margin:16px auto 40px;}
+  }
+</style>
 </head>
-
 <body>
 
-  <header>
-    <div class="nav-inner">
-      <div class="nav-mark">GSC<span>.</span></div>
-      <nav>
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#achievements">Achievements</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+<div class="editor">
+  <div class="titlebar">
+    <div class="traffic"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+    <div class="tabs">
+      <div class="tab active"><span class="dot"></span>portfolio.tsx</div>
+      <div class="tab">resume.pdf</div>
+      <div class="tab">contact.json</div>
     </div>
-  </header>
+  </div>
 
-  <main>
-    <div class="wrap hero">
-      <div class="hero-tag"><span class="dot"></span>OPEN TO OPPORTUNITIES</div>
-      <h1>Gedela Sasidhar<br>Chakrapani</h1>
-      <p class="role">Electrical &amp; Electronics undergrad, <strong>building toward software &amp; data
-          science.</strong></p>
-      <p class="hero-desc">3rd-year B.Tech student at IIIT Gwalior, pursuing a second degree in Data Science at IIT
-        Madras alongside it. 800+ DSA problems solved, three shipped full-stack &amp; ML projects, and a steady push
-        toward a career in the IT sector.</p>
-      <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">View projects →</a>
-        <a href="#contact" class="btn btn-ghost">Get in touch</a>
-      </div>
+  <div class="body-row">
+    <div class="gutter" aria-hidden="true">
+      <div class="line-mark" style="top:40px;">01</div>
+      <div class="line-mark" style="top:340px;">14</div>
+      <div class="line-mark" style="top:640px;">29</div>
+      <div class="line-mark" style="top:1020px;">47</div>
+      <div class="line-mark" style="top:1560px;">68</div>
+      <div class="line-mark" style="top:2120px;">92</div>
     </div>
 
-    <div class="trace" aria-hidden="true">
-      <svg viewBox="0 0 760 28" preserveAspectRatio="none">
-        <line x1="0" y1="14" x2="760" y2="14" stroke="#E2E5EA" stroke-width="1" />
-        <circle cx="60" cy="14" r="3" fill="#2F6FED" />
-        <circle cx="380" cy="14" r="3" fill="#E2E5EA" />
-        <circle cx="700" cy="14" r="3" fill="#E2E5EA" />
-      </svg>
-    </div>
+    <div class="content">
 
-    <section id="about" class="wrap">
-      <div class="eyebrow">About</div>
-      <p class="about-body">I'm an Electrical and Electronics Engineering student at <strong>IIIT Gwalior</strong>,
-        currently pursuing a second degree in <strong>Data Science at IIT Madras</strong> alongside it. While my core
-        degree is rooted in circuits and systems, my real pull is toward software — I've been building that out through
-        full-stack web apps, machine learning models, and consistent competitive programming practice, with 800+
-        problems solved across LeetCode, CodeChef, and Codeforces. I also help run large-scale student events, most
-        recently coordinating logistics for 1000+ participants at an inter-IIIT sports fest.</p>
-      <div class="facts">
-        <div class="fact">
-          <div class="fact-label">Institute</div>
-          <div class="fact-value">IIIT Gwalior</div>
+      <!-- HERO -->
+      <div class="hero">
+        <div class="comment-block">
+          /**<br>
+          &nbsp;* Gedela Sasidhar Chakrapani<br>
+          &nbsp;* Electrical &amp; Electronics undergrad — building toward software &amp; data science<br>
+          &nbsp;* IIIT Gwalior · IIT Madras (BS Data Science)<br>
+          &nbsp;*/
         </div>
-        <div class="fact">
-          <div class="fact-label">Degree</div>
-          <div class="fact-value">B.Tech, EEE</div>
-        </div>
-        <div class="fact">
-          <div class="fact-label">CGPA</div>
-          <div class="fact-value">8.34 / 10</div>
-        </div>
-        <div class="fact">
-          <div class="fact-label">Second Degree</div>
-          <div class="fact-value">BS Data Science, IIT Madras</div>
-        </div>
-        <div class="fact">
-          <div class="fact-label">DSA Solved</div>
-          <div class="fact-value">800+ Problems</div>
-        </div>
-        <div class="fact">
-          <div class="fact-label">LeetCode Rating</div>
-          <div class="fact-value">1581</div>
+        <h1>Gedela Sasidhar Chakrapani<span class="cursor"></span></h1>
+        <div class="role-line"><span class="kw">const</span> role = <span class="str">"Aspiring Software & Data Science Engineer"</span><span class="punc">;</span></div>
+        <div class="status-pill"><span class="blip"></span>STATUS: OPEN TO OPPORTUNITIES</div>
+        <p class="hero-desc">3rd-year B.Tech student pursuing a dual degree — core engineering at IIIT Gwalior, Data Science at IIT Madras. 800+ DSA problems solved, three shipped full-stack &amp; ML projects, building steadily toward the IT sector.</p>
+        <div class="cmd-row">
+          <a href="#projects" class="cmd-btn primary">$ view --projects</a>
+          <a href="#contact" class="cmd-btn ghost">$ contact --me</a>
         </div>
       </div>
-    </section>
 
-    <div class="trace" aria-hidden="true">
-      <svg viewBox="0 0 760 28" preserveAspectRatio="none">
-        <line x1="0" y1="14" x2="760" y2="14" stroke="#E2E5EA" stroke-width="1" />
-        <circle cx="140" cy="14" r="3" fill="#2F6FED" />
-        <circle cx="460" cy="14" r="3" fill="#E2E5EA" />
-      </svg>
-    </div>
+      <!-- ABOUT -->
+      <section id="about">
+        <div class="sec-head"><span class="fn">about</span><span class="paren">()</span></div>
+        <p class="about-text">I'm an Electrical and Electronics Engineering student at <strong>IIIT Gwalior</strong>, currently pursuing a second degree in <strong>Data Science at IIT Madras</strong> alongside it. My core degree is rooted in circuits and systems, but my real pull is toward software — built out through full-stack apps, ML models, and steady competitive programming. I also help run large-scale student events, most recently coordinating logistics for 1000+ participants at an inter-IIIT sports fest.</p>
+        <div class="stats-table">
+          <div class="stats-row"><div class="k">institute</div><div class="v">IIIT Gwalior</div></div>
+          <div class="stats-row"><div class="k">degree</div><div class="v">B.Tech, EEE</div></div>
+          <div class="stats-row"><div class="k">cgpa</div><div class="v">8.34 / 10</div></div>
+          <div class="stats-row"><div class="k">second_degree</div><div class="v">BS Data Science, IIT Madras</div></div>
+          <div class="stats-row"><div class="k">dsa_solved</div><div class="v">800+ problems</div></div>
+          <div class="stats-row"><div class="k">leetcode_rating</div><div class="v">1581</div></div>
+        </div>
+      </section>
 
-    <section id="skills" class="wrap">
-      <div class="eyebrow">Skills</div>
-      <div class="skill-groups">
-        <div>
-          <div class="skill-group-label">Programming Languages</div>
-          <div class="tags">
-            <span class="tag">C</span>
-            <span class="tag">C++</span>
-            <span class="tag">Python</span>
-            <span class="tag">Java (basic)</span>
-            <span class="tag">HTML / CSS</span>
+      <!-- SKILLS -->
+      <section id="skills">
+        <div class="sec-head"><span class="fn">skills</span><span class="paren">.import</span></div>
+
+        <div class="import-block">
+          <div class="import-line"><span class="kw">import</span> { languages } <span class="kw">from</span> <span class="str">'./skills/core'</span><span class="punc">;</span></div>
+          <div class="tag-row">
+            <span class="tag">C</span><span class="tag">C++</span><span class="tag">Python</span><span class="tag">Java (basic)</span><span class="tag">HTML / CSS</span>
           </div>
         </div>
-        <div>
-          <div class="skill-group-label">Machine Learning</div>
-          <div class="tags">
-            <span class="tag">Supervised &amp; Unsupervised Learning</span>
-            <span class="tag">Feature Engineering</span>
-            <span class="tag">Model Selection</span>
-            <span class="tag">Stacking Ensembles</span>
-            <span class="tag">Cross-Validation / ROC-AUC / F1</span>
-          </div>
-        </div>
-        <div>
-          <div class="skill-group-label">Backend &amp; Deployment</div>
-          <div class="tags">
-            <span class="tag">Flask</span>
-            <span class="tag">FastAPI</span>
-            <span class="tag">Model Deployment</span>
-          </div>
-        </div>
-        <div>
-          <div class="skill-group-label">Libraries &amp; Frameworks</div>
-          <div class="tags">
-            <span class="tag">NumPy</span>
-            <span class="tag">Pandas</span>
-            <span class="tag">Scikit-Learn</span>
-            <span class="tag">TensorFlow</span>
-            <span class="tag">Matplotlib</span>
-            <span class="tag">Jinja2</span>
-            <span class="tag">Bootstrap</span>
-          </div>
-        </div>
-        <div>
-          <div class="skill-group-label">Databases</div>
-          <div class="tags">
-            <span class="tag">SQL</span>
-            <span class="tag">MySQL</span>
-            <span class="tag">SQLite</span>
-            <span class="tag">SQLAlchemy</span>
-          </div>
-        </div>
-        <div>
-          <div class="skill-group-label">Dev Tools</div>
-          <div class="tags">
-            <span class="tag">Git / GitHub</span>
-            <span class="tag">Jupyter</span>
-            <span class="tag">Colab</span>
-            <span class="tag">Docker</span>
-            <span class="tag">Hugging Face</span>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <div class="trace" aria-hidden="true">
-      <svg viewBox="0 0 760 28" preserveAspectRatio="none">
-        <line x1="0" y1="14" x2="760" y2="14" stroke="#E2E5EA" stroke-width="1" />
-        <circle cx="220" cy="14" r="3" fill="#2F6FED" />
-        <circle cx="600" cy="14" r="3" fill="#E2E5EA" />
-      </svg>
+        <div class="import-block">
+          <div class="import-line"><span class="kw">import</span> { ml } <span class="kw">from</span> <span class="str">'./skills/machine-learning'</span><span class="punc">;</span></div>
+          <div class="tag-row">
+            <span class="tag">Supervised &amp; Unsupervised Learning</span><span class="tag">Feature Engineering</span><span class="tag">Model Selection</span><span class="tag">Stacking Ensembles</span><span class="tag">Cross-Validation / ROC-AUC / F1</span>
+          </div>
+        </div>
+
+        <div class="import-block">
+          <div class="import-line"><span class="kw">import</span> { backend } <span class="kw">from</span> <span class="str">'./skills/backend'</span><span class="punc">;</span></div>
+          <div class="tag-row">
+            <span class="tag">Flask</span><span class="tag">FastAPI</span><span class="tag">Model Deployment</span>
+          </div>
+        </div>
+
+        <div class="import-block">
+          <div class="import-line"><span class="kw">import</span> { libs } <span class="kw">from</span> <span class="str">'./skills/libraries'</span><span class="punc">;</span></div>
+          <div class="tag-row">
+            <span class="tag">NumPy</span><span class="tag">Pandas</span><span class="tag">Scikit-Learn</span><span class="tag">TensorFlow</span><span class="tag">Matplotlib</span><span class="tag">Jinja2</span><span class="tag">Bootstrap</span>
+          </div>
+        </div>
+
+        <div class="import-block">
+          <div class="import-line"><span class="kw">import</span> { databases } <span class="kw">from</span> <span class="str">'./skills/data'</span><span class="punc">;</span></div>
+          <div class="tag-row">
+            <span class="tag">SQL</span><span class="tag">MySQL</span><span class="tag">SQLite</span><span class="tag">SQLAlchemy</span>
+          </div>
+        </div>
+
+        <div class="import-block" style="margin-bottom:0;">
+          <div class="import-line"><span class="kw">import</span> { tools } <span class="kw">from</span> <span class="str">'./skills/tools'</span><span class="punc">;</span></div>
+          <div class="tag-row">
+            <span class="tag">Git / GitHub</span><span class="tag">Jupyter</span><span class="tag">Colab</span><span class="tag">Docker</span><span class="tag">Hugging Face</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects">
+        <div class="sec-head"><span class="kw">const</span> <span class="fn">projects</span> = <span class="paren">[]</span></div>
+
+        <div class="code-card">
+          <div><span class="brace">{</span></div>
+          <div class="indent"><span class="key">name</span><span class="colon">:</span> <span class="val">"Trekking-Management Application"</span><span class="arr">,</span></div>
+          <div class="indent"><span class="key">stack</span><span class="colon">:</span></div>
+          <div class="stack-tags"><span>Flask</span><span>Python</span><span>SQLite</span><span>SQLAlchemy</span><span>Bootstrap</span></div>
+          <div class="indent"><span class="key">desc</span><span class="colon">:</span></div>
+          <div class="desc-val">Full-stack, role-based web app for managing trekking activities — separate dashboards for Admin, Trek Staff, and Users; secure auth, booking, staff approval, overbooking prevention.</div>
+          <div class="indent"><span class="key">link</span><span class="colon">:</span> <a href="https://github.com/Sasidhar1906" class="val" target="_blank" rel="noopener">"github.com/Sasidhar1906"</a></div>
+          <div><span class="brace">}</span><span class="arr">,</span></div>
+        </div>
+
+        <div class="code-card">
+          <div><span class="brace">{</span></div>
+          <div class="indent"><span class="key">name</span><span class="colon">:</span> <span class="val">"Multi-Document AI Assistant"</span><span class="arr">,</span></div>
+          <div class="indent"><span class="key">stack</span><span class="colon">:</span></div>
+          <div class="stack-tags"><span>LangChain</span><span>RAG</span><span>FastAPI</span><span>Streamlit</span></div>
+          <div class="indent"><span class="key">desc</span><span class="colon">:</span></div>
+          <div class="desc-val">RAG-based system for interacting with multiple PDFs at once — LangChain, FAISS, and embeddings for semantic search, with a FastAPI backend and Streamlit chat UI for upload, Q&amp;A, and summarization.</div>
+          <div class="indent"><span class="key">link</span><span class="colon">:</span> <a href="https://github.com/Sasidhar1906" class="val" target="_blank" rel="noopener">"github.com/Sasidhar1906"</a></div>
+          <div><span class="brace">}</span><span class="arr">,</span></div>
+        </div>
+
+        <div class="code-card">
+          <div><span class="brace">{</span></div>
+          <div class="indent"><span class="key">name</span><span class="colon">:</span> <span class="val">"Facial Emotion Recognition"</span><span class="arr">,</span></div>
+          <div class="indent"><span class="key">stack</span><span class="colon">:</span></div>
+          <div class="stack-tags"><span>ResNet50V2</span><span>TensorFlow Lite</span><span>FastAPI</span></div>
+          <div class="indent"><span class="key">desc</span><span class="colon">:</span></div>
+          <div class="desc-val">7-class facial emotion classifier on ResNet50V2 with transfer learning, trained on 30K+ augmented images — 68.12% accuracy, 0.68 F1. Converted to TFLite, deployed as a FastAPI inference API on Render.</div>
+          <div class="indent"><span class="key">link</span><span class="colon">:</span> <a href="https://github.com/Sasidhar1906" class="val" target="_blank" rel="noopener">"github.com/Sasidhar1906"</a></div>
+          <div><span class="brace">}</span></div>
+        </div>
+      </section>
+
+      <!-- ACHIEVEMENTS -->
+      <section id="achievements">
+        <div class="sec-head"><span class="fn">achievements</span><span class="paren">.log</span></div>
+        <div class="git-log">
+          <div class="git-cmd"><span class="punc">$</span> git log --stats --author="sasidhar"</div>
+
+          <div class="commit">
+            <div class="commit-hash">commit 7f3a9c1</div>
+            <div class="commit-msg">Solved 800+ Data Structures &amp; Algorithms problems across LeetCode, CodeChef, and Codeforces — 1581 rating on LeetCode, peak 1142 on Codeforces.</div>
+          </div>
+          <div class="commit">
+            <div class="commit-hash">commit 4b1e02d</div>
+            <div class="commit-msg">Supervised accommodation logistics and volunteer coordination for 1000+ participants — TWARAN, Inter-IIIT Sports Fest.</div>
+          </div>
+          <div class="commit" style="margin-bottom:0;">
+            <div class="commit-hash">commit 9c8d114</div>
+            <div class="commit-msg">Core Team Member at Infotsav — organized and coordinated technical competitions for 1000+ participants.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" style="margin-bottom:20px;">
+        <div class="sec-head"><span class="kw">export</span> <span class="kw">const</span> <span class="fn">contact</span></div>
+        <div class="export-block">
+          <span class="brace">{</span><br>
+          &nbsp;&nbsp;<span class="key">email</span><span class="colon">:</span> <a href="mailto:gsasidhar06@gmail.com" class="val">"gsasidhar06@gmail.com"</a><span class="punc">,</span><br>
+          &nbsp;&nbsp;<span class="key">phone</span><span class="colon">:</span> <a href="tel:+919025174284" class="val">"+91 90251 74284"</a><span class="punc">,</span><br>
+          &nbsp;&nbsp;<span class="key">github</span><span class="colon">:</span> <a href="https://github.com/Sasidhar1906" class="val" target="_blank" rel="noopener">"github.com/Sasidhar1906"</a><span class="punc">,</span><br>
+          &nbsp;&nbsp;<span class="key">linkedin</span><span class="colon">:</span> <a href="https://www.linkedin.com/in/gedela-sasidhar-chakrapani-3b2124326/" class="val" target="_blank" rel="noopener">"linkedin.com/in/gedela-sasidhar"</a><span class="punc">,</span><br>
+          &nbsp;&nbsp;<span class="key">leetcode</span><span class="colon">:</span> <a href="https://leetcode.com/u/sasidhar1906/" class="val" target="_blank" rel="noopener">"leetcode.com/u/sasidhar1906"</a><span class="punc">,</span><br>
+          &nbsp;&nbsp;<span class="key">codeforces</span><span class="colon">:</span> <a href="https://codeforces.com/profile/Sasidhar1906" class="val" target="_blank" rel="noopener">"codeforces.com/profile/Sasidhar1906"</a><span class="punc">,</span><br>
+          &nbsp;&nbsp;<span class="key">codechef</span><span class="colon">:</span> <a href="https://www.codechef.com/users/team_bug_60" class="val" target="_blank" rel="noopener">"codechef.com/users/team_bug_60"</a><br>
+          <span class="brace">}</span>
+        </div>
+      </section>
+
     </div>
+  </div>
 
-    <section id="projects" class="wrap">
-      <div class="eyebrow">Projects</div>
-
-      <div class="project">
-        <div class="project-head">
-          <div class="project-title">Trekking-Management Application</div>
-          <a href="https://github.com/Sasidhar1906" class="project-link" target="_blank" rel="noopener">GitHub ↗</a>
-        </div>
-        <p class="project-desc">Full-stack, role-based web app for managing trekking activities, with separate
-          dashboards for Admin, Trek Staff, and Users — including secure auth, booking, staff approval, and overbooking
-          prevention.</p>
-        <div class="project-tags">
-          <span>Flask</span><span>Python</span><span>SQLite</span><span>SQLAlchemy</span><span>Bootstrap</span></div>
-      </div>
-
-      <div class="project">
-        <div class="project-head">
-          <div class="project-title">Multi-Document AI Assistant</div>
-          <a href="https://github.com/Sasidhar1906" class="project-link" target="_blank" rel="noopener">GitHub ↗</a>
-        </div>
-        <p class="project-desc">RAG-based system for interacting with multiple PDFs at once, using LangChain, FAISS, and
-          embeddings for semantic search, with a FastAPI backend and a Streamlit chat interface for upload, Q&amp;A, and
-          summarization.</p>
-        <div class="project-tags"><span>LangChain</span><span>RAG</span><span>FastAPI</span><span>Streamlit</span></div>
-      </div>
-
-      <div class="project">
-        <div class="project-head">
-          <div class="project-title">Facial Emotion Recognition</div>
-          <a href="https://github.com/Sasidhar1906" class="project-link" target="_blank" rel="noopener">GitHub ↗</a>
-        </div>
-        <p class="project-desc">7-class facial emotion classifier built on ResNet50V2 with transfer learning, trained on
-          30K+ augmented images — 68.12% accuracy, 0.68 F1-score — converted to TFLite and deployed as a FastAPI
-          inference API on Render.</p>
-        <div class="project-tags"><span>ResNet50V2</span><span>TensorFlow Lite</span><span>FastAPI</span></div>
-      </div>
-    </section>
-
-    <div class="trace" aria-hidden="true">
-      <svg viewBox="0 0 760 28" preserveAspectRatio="none">
-        <line x1="0" y1="14" x2="760" y2="14" stroke="#E2E5EA" stroke-width="1" />
-        <circle cx="100" cy="14" r="3" fill="#2F6FED" />
-        <circle cx="520" cy="14" r="3" fill="#E2E5EA" />
-      </svg>
-    </div>
-
-    <section id="achievements" class="wrap">
-      <div class="eyebrow">Achievements &amp; Leadership</div>
-      <div class="project">
-        <p class="project-desc" style="margin-bottom:14px;">Solved 800+ Data Structures &amp; Algorithms problems across
-          LeetCode, CodeChef, and Codeforces — 1581 rating on LeetCode, peak 1142 on Codeforces.</p>
-        <p class="project-desc" style="margin-bottom:14px;">Supervised accommodation logistics and volunteer
-          coordination for 1000+ participants at TWARAN, the Inter-IIIT Sports Fest.</p>
-        <p class="project-desc" style="margin-bottom:0;">Core Team Member at Infotsav, organizing and coordinating
-          technical competitions for 1000+ participants.</p>
-      </div>
-    </section>
-
-    <div class="trace" aria-hidden="true">
-      <svg viewBox="0 0 760 28" preserveAspectRatio="none">
-        <line x1="0" y1="14" x2="760" y2="14" stroke="#E2E5EA" stroke-width="1" />
-        <circle cx="180" cy="14" r="3" fill="#2F6FED" />
-        <circle cx="560" cy="14" r="3" fill="#E2E5EA" />
-      </svg>
-    </div>
-
-    <section id="contact" class="wrap">
-      <div class="eyebrow">Contact</div>
-      <p class="about-body">Open to internships, entry-level software roles, and collaborations. Reach out through any
-        of the following:</p>
-      <div class="contact-row">
-        <a href="mailto:gsasidhar06@gmail.com" class="contact-card">
-          <div class="label">Email</div>
-          <div class="value">gsasidhar06@gmail.com</div>
-        </a>
-        <a href="tel:+919025174284" class="contact-card">
-          <div class="label">Phone</div>
-          <div class="value">+91 90251 74284</div>
-        </a>
-        <a href="https://github.com/Sasidhar1906" class="contact-card" target="_blank" rel="noopener">
-          <div class="label">GitHub</div>
-          <div class="value">github.com/Sasidhar1906</div>
-        </a>
-        <a href="https://www.linkedin.com/in/gedela-sasidhar-chakrapani-3b2124326/" class="contact-card" target="_blank"
-          rel="noopener">
-          <div class="label">LinkedIn</div>
-          <div class="value">linkedin.com/in/gedela-sasidhar</div>
-        </a>
-        <a href="https://leetcode.com/u/sasidhar1906/" class="contact-card" target="_blank" rel="noopener">
-          <div class="label">LeetCode</div>
-          <div class="value">leetcode.com/u/sasidhar1906</div>
-        </a>
-        <a href="https://codeforces.com/profile/Sasidhar1906" class="contact-card" target="_blank" rel="noopener">
-          <div class="label">Codeforces</div>
-          <div class="value">codeforces.com/profile/Sasidhar1906</div>
-        </a>
-        <a href="https://www.codechef.com/users/team_bug_60" class="contact-card" target="_blank" rel="noopener">
-          <div class="label">CodeChef</div>
-          <div class="value">codechef.com/users/team_bug_60</div>
-        </a>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    © 2026 Gedela Sasidhar Chakrapani · ABV-IIITM Gwalior
-  </footer>
+  <div class="statusbar">
+    <span class="ok">● no problems</span>
+    <span>UTF-8</span>
+    <span>Ln 128, Col 1</span>
+    <span>main*</span>
+    <span>© 2026 Gedela Sasidhar Chakrapani</span>
+  </div>
+</div>
 
 </body>
-
 </html>
